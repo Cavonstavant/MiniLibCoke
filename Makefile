@@ -6,7 +6,8 @@
 ##
 
 SRC_ASM := 	src/my_strlen.asm \
-			src/my_strchr.asm
+			src/my_strchr.asm \
+			src/my_strrchr.asm
 
 OBJ_ASM := 	$(SRC_ASM:.asm=.o)
 

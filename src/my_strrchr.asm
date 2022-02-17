@@ -1,17 +1,22 @@
 [BITS 64]
 global strchr:function
+extern strlen
 section .text
 
-strchr:
+strrchr:
     enter 0,0
     cmp rdi, 0 ; check if the string is NULL / empty
     je not_found
+    push rdi
+    call strlen wrt ..plt
+    pop rdi
+    add rcx, rax
 
 loop:
     cmp [rdi + rcx], sil; compare str[0 + rcx] with the c
     je found
     cmp byte[rdi + rcx], 0; check if we reached the end of the string
-    inc rcx ; increase the counter
+    dec rcx ; decrease the counter
     jmp loop
 
 found:

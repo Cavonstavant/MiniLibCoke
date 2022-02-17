@@ -1,0 +1,6 @@
+*.o
+*.elf
+*.so
+main.c
+.vscode/
+a.out

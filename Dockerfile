@@ -1,5 +1,5 @@
 FROM epitechcontent/epitest-docker
-COPY src/ .
+COPY . .
 COPY Makefile .
 RUN make
 CMD ["make", "tests_run"]

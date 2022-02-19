@@ -1,6 +1,5 @@
 [BITS 64]
 global memset:function
-extern strlen
 section .text
 
 memset:

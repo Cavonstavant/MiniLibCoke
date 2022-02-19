@@ -1,6 +1,6 @@
 *.o
 *.elf
 *.so
-main.c
+main_test.c
 .vscode/
 a.out

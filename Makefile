@@ -42,6 +42,7 @@ re: fclean all
 tests_run: re
 	cp libasm.so tests/
 	$(GCC) $(T_STRC) -ldl -o tests/main
+	ls -R
 	./tests/main
 
 .PHONY: all clean fclean re tests_run

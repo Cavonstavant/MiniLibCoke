@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
-    step:
+    steps:
       - name: build
         run: make
   tests:
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
-    step:
+    steps:
       - name: run_tests
         run: make tests_run
     # steps:

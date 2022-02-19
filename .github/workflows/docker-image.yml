@@ -10,14 +10,15 @@ jobs:
 
   build:
 
-    # runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest
+      container:
+        image: epitechcontent/epitest-docker
+      step:
+        - name: tests_run
+          run: make tests_run
     # steps:
     # - uses: actions/checkout@v2
     #   continue-on-error: true
 
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag test_containter:$(date +%s)
-    runs:
-      using: 'docker'
-      image: 'Dockerfile'

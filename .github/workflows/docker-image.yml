@@ -9,13 +9,19 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-      container:
-        image: epitechcontent/epitest-docker
-      step:
-        - name: tests_run
-          run: make tests_run
+    container:
+      image: epitechcontent/epitest-docker
+    step:
+      - name: build
+        run: make
+  tests:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker
+    step:
+      - name: run_tests
+        run: make tests_run
     # steps:
     # - uses: actions/checkout@v2
     #   continue-on-error: true

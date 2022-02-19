@@ -1,8 +1,10 @@
 [BITS 64]
 global strchr:function
+global rindex:function
 extern strlen
 section .text
 
+rindex:
 strrchr:
     enter 0,0
     cmp rdi, 0 ; check if the string is NULL / empty

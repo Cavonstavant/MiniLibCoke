@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker
 
 on:
   push:
@@ -7,9 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker

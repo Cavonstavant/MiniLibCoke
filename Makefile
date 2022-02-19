@@ -9,20 +9,24 @@ SRC_ASM := 	src/my_strlen.asm \
 			src/my_strchr.asm \
 			src/my_strrchr.asm
 
+T_STRC := tests/main.c
+
 OBJ_ASM := 	$(SRC_ASM:.asm=.o)
 
 ASM := nasm
-CC := gcc
 
 AFLAGS := -f elf64
-CFLAGS := -shared
+CFLAGS := -shared -fpic -g
+
+LD := ld
+GCC := gcc
 
 NAME := libasm.so
 
 all: $(SRC_ASM) $(NAME)
 
 $(NAME): $(OBJ_ASM)
-	$(CC) $(CFLAGS) $(OBJ_ASM) -o $@
+	$(LD) $(CFLAGS) $(OBJ_ASM) -o $@
 
 %.o: %.asm
 	$(ASM) $(AFLAGS) $< -o $@
@@ -35,4 +39,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+tests_run: re
+	cp libasm.so tests/
+	$(GCC) $(T_STRC) -ldl -o tests/main
+	./tests/main
+
+.PHONY: all clean fclean re tests_run

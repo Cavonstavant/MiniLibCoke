@@ -40,8 +40,10 @@ fclean: clean
 re: fclean all
 
 tests_run: re
+	chmod +r libasm.so
 	cp libasm.so tests/
 	$(GCC) $(T_STRC) -ldl -o tests/main
+	ls -lR
 	./tests/main
 
 .PHONY: all clean fclean re tests_run

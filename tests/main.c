@@ -14,7 +14,7 @@ int main(void)
     char *str = "Hello World";
     char *str1 = malloc(sizeof(char) * 12);
 
-    handle = dlopen("../libasm.so", RTLD_LAZY);
+    handle = dlopen("libasm.so", RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "%s\n", dlerror());
         return 1;

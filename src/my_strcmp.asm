@@ -22,4 +22,3 @@ end:
     sub rax, rbx ; compute difference
     leave
     ret
-

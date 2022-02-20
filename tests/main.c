@@ -35,7 +35,7 @@ int main(void)
     _memcpy(str1, str, _strlen(str));
     printf("_memcpy(str1, str, _strlen(str)) str1: %s\n", str1);
     printf("_strcmp(str1, str) str1: %d\n", _strcmp(str1, str));
-    _memset(str1, 'a', 12);
+    printf("_memset(str1=%p, 'a', 12): %p\n", str1, _memset(str1, 'a', 12));
     printf("str adress: %p\n", str);
     printf("%d\n", (*_strlen)(str));
     printf("_strchr(str, 'o'): %s\n", (*_strchr)(str, 'o'));

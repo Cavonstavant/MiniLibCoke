@@ -10,7 +10,8 @@ SRC_ASM := 	src/my_strlen.asm \
 			src/my_strrchr.asm \
 			src/my_memset.asm \
 			src/my_memcpy.asm \
-			src/my_strcmp.asm
+			src/my_strcmp.asm \
+			src/my_strncmp.asm
 
 T_STRC := tests/main.c
 

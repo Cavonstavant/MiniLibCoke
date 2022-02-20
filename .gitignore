@@ -4,3 +4,6 @@
 main_test.c
 .vscode/
 a.out
+peda*
+.gdb_history
+main

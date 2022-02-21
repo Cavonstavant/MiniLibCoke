@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
+#include <unistd.h>
+#include <string.h>
 
 size_t (*_strlen)(const char *s);
 char *(*_strchr)(const char *s, int c);
@@ -9,14 +11,14 @@ void *(*_memset)(void *s, int c, size_t n);
 void *(*_memcpy)(void *dest, const void *src, size_t n);
 void *(*_strcmp)(const char *s1, const char *s2);
 
-int main(void)
+int main(int ac, char **av)
 {
     void *handle;
     char *error;
     char *str = "Hello World";
     char *str1 = malloc(sizeof(char) * 12);
 
-    handle = dlopen("libasm.so", RTLD_LAZY);
+    handle = dlopen(av[1], RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "%s\n", dlerror());
         return 1;

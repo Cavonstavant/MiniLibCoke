@@ -13,6 +13,7 @@ char *(*_strrchr)(const char *s, int c);
 void *(*_memset)(void *s, int c, size_t n);
 void *(*_memcpy)(void *restrict dest, const void *restrict src, size_t n);
 int (*_strcmp)(const char *s1, const char *s2);
+int (*_strncmp)(const char *s1, const char *s2, size_t n);
 
 char *get_lib_path(char *lib_name)
 {
@@ -116,3 +117,16 @@ Test(test_memcpy, tests)
     cr_assert_str_eq(str1, "Hello World");
 }
 
+Test(test_strncpm, tests)
+{
+    char *str1 = "Hello Hello";
+    char *str2 = "Hello World";
+    char *error;
+
+    _strncmp = dlsym(handle, "strncmp");
+    if ((error = dlerror()) != NULL) {
+        fprintf(stderr, "%s\n", error);
+        return;
+    }
+    cr_assert_eq(_strncmp(str1, str2, 5), strncmp(str1, str2, 5));
+}

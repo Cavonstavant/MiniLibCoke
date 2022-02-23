@@ -4,7 +4,6 @@ section .text
 
 strlen:
     enter 0, 0
-    pushf
     mov rbx, rdi
     xor al, al
     mov rcx, 0xffffffffffffffff
@@ -13,6 +12,5 @@ strlen:
     sub rdi, rbx
     sub rdi, 1
     mov rax, rdi
-    popf
     leave
     ret

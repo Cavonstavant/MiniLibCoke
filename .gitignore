@@ -7,3 +7,4 @@ a.out
 peda*
 .gdb_history
 main
+vgcore*

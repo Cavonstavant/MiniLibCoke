@@ -13,7 +13,7 @@ SRC_ASM := 	src/my_strlen.asm \
 			src/my_strcmp.asm \
 			src/my_strncmp.asm
 
-T_STRC := tests/main.c
+T_STRC := tests/tests.c
 
 OBJ_ASM := 	$(SRC_ASM:.asm=.o)
 
@@ -46,7 +46,7 @@ re: fclean all
 tests_run: re
 	chmod +r libasm.so
 	cp libasm.so tests/
-	$(GCC) -g $(T_STRC) -ldl -o tests/main
-	./tests/main $(shell pwd)/libasm.so
+	$(GCC) -g $(T_STRC) -ldl -lcriterion -o tests/main
+	./tests/main
 
 .PHONY: all clean fclean re tests_run

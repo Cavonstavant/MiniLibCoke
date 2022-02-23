@@ -5,6 +5,10 @@ section .text
 strcmp:
     enter 0, 0
 loop:
+    cmp rdi, 0 ; check if s1 is NULL
+    je null_end ;
+    cmp rsi, 0 ; check if s2 is NULL
+    je null_end ;
     mov r8b, byte[rdi] ; copy first byte of s1 to temp register
     cmp r8b, 0 ; check if it is zero
     je end
@@ -18,7 +22,11 @@ loop:
     jmp loop
 end:
     movzx rax, r8b ; cuz of partial registers we need to extend r8b to r8
-    movzx rbx, r9b ; same here
-    sub rax, rbx ; compute difference
+    movzx r10, r9b ; same here
+    sub rax, r10 ; compute difference
+    leave
+    ret
+null_end:
+    xor rax, rax ; return 0
     leave
     ret

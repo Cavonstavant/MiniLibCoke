@@ -11,7 +11,7 @@ loop:
     mov [rdi], sil ; else write to memory
     inc rdi ; increment offset
     dec rcx ; decrement count
-    inc rdx;
+    inc rdx ; increment temp count
     jmp loop ; loop
 
 end:

@@ -21,7 +21,7 @@ loop:
     jmp loop
 end:
     movzx rax, r8b ; cuz of partial registers we need to extend r8b to r8
-    movzx rbx, r9b ; same here
-    sub rax, rbx ; compute difference
+    movzx r10, r9b ; same here
+    sub rax, r10 ; compute difference
     leave
     ret

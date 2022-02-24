@@ -50,8 +50,8 @@ Test(tests, test_strlen, .init=setup)
         fprintf(stderr, "%s\n", error);
         return;
     }
-    cr_assert(_strlen(str) == strlen(str));
-    cr_assert(_strlen("") == strlen(""));
+    cr_assert_eq(_strlen(str), strlen(str), "expected %zu, got %zu", strlen(str), _strlen(str));
+    cr_assert_eq(_strlen(""), strlen(""), "expected %zu, got %zu", strlen(""), _strlen(""));
 }
 
 Test(test_strchr,  tests)
@@ -70,10 +70,13 @@ Test(test_strchr,  tests)
 Test(test_strcmp, tests)
 {
     char *str = "Hello World";
-    char *str1 = "World Hello";
+    char *str1 = "hello world";
+    char *str2 = "";
 
     _strcmp = dlsym(handle, "strcmp");
+    printf("%d %d", _strcmp(str1, str2), strcmp(str1, str2));
     cr_assert_eq(_strcmp(str, str1), strcmp(str, str1), "excpected: %d, got: %d", strcmp(str, str1), _strcmp(str, str1));
+    cr_assert_eq(_strcmp(str1, str2), strcmp(str1, str2), "excpected: %d, got: %d", strcmp(str, str1), _strcmp(str, str1));
 }
 
 Test(test_strrchr, tests)
@@ -99,8 +102,12 @@ Test(test_memset, tests)
         fprintf(stderr, "%s\n", error);
         return;
     }
-    cr_assert_eq(_memset(str1, 'a', 12), memset(str1, 'a', 12));
-    cr_assert_str_eq(str1, "aaaaaaaaaaaa");
+    for (int i = 0; i < 12; i++)
+        str1[i] = 'x';
+    str1[12] = 0;
+    cr_assert_str_eq(_memset(str1, 'a', 10), str1);
+    cr_assert_str_eq(str1, "aaaaaaaaaaxx");
+    free(str1);
 }
 
 Test(test_memcpy, tests)
@@ -134,7 +141,7 @@ Test(test_strncmp, tests)
 
 Test(test_strcasecmp, tests)
 {
-    char *str1 = "hello world ";
+    char *str1 = "hello world";
     char *str2 = "HELLO WORLD";
     char *error;
 

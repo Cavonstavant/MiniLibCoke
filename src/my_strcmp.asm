@@ -4,11 +4,15 @@ section .text
 
 strcmp:
     enter 0, 0
-loop:
     cmp rdi, 0 ; check if s1 is NULL
     je null_end ;
     cmp rsi, 0 ; check if s2 is NULL
     je null_end ;
+loop:
+    cmp rdi, 0 ; check if s1 is NULL
+    je string_end ;
+    cmp rsi, 0 ; check if s2 is NULL
+    je string_end ;
     mov r8b, byte[rdi] ; copy first byte of s1 to temp register
     cmp r8b, 0 ; check if it is zero
     je end
@@ -30,3 +34,8 @@ null_end:
     xor rax, rax ; return 0
     leave
     ret
+string_end:
+    mov r8b, byte[rdi]
+    mov r9b, byte[rsi]
+    sub r8b, r9b
+    movzx rax, r8b

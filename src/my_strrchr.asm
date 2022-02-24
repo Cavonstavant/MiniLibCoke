@@ -10,7 +10,7 @@ strrchr:
     cmp rdi, 0 ; check if the string is NULL / empty
     je not_found
     push rdi
-    call strlen wrt ..plt
+    jmp strlen wrt ..plt
     pop rdi
     add rcx, rax
 

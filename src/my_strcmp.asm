@@ -4,38 +4,17 @@ section .text
 
 strcmp:
     enter 0, 0
-    cmp rdi, 0 ; check if s1 is NULL
-    je null_end ;
-    cmp rsi, 0 ; check if s2 is NULL
-    je null_end ;
-loop:
-    cmp rdi, 0 ; check if s1 is NULL
-    je string_end ;
-    cmp rsi, 0 ; check if s2 is NULL
-    je string_end ;
-    mov r8b, byte[rdi] ; copy first byte of s1 to temp register
-    cmp r8b, 0 ; check if it is zero
-    je end
-    mov r9b, byte[rsi] ; copy first byte of s2 to temp register
-    cmp r9b, 0 ; check if it is zero
-    je end
-    cmp r8b, r9b ; compare bytes
-    jne end
-    inc rdi ; increment s1 pointer
-    inc rsi ; increment s2 pointer
-    jmp loop
-end:
-    movzx rax, r8b ; cuz of partial registers we need to extend r8b to r8
-    movzx r10, r9b ; same here
-    sub rax, r10 ; compute difference
+    cld ; clear direction flag => go left to right
+.loop cmpsb ; https://faydoc.tripod.com/cpu/cmpsb.htm no pain no gain
+    jnz .not_eq ; check the comparison effectued in cmpsb
+    cmp byte[rdi - 1], 0 ; check if end-of-string
+    jne .loop ; loop if not
+    xor rax, rax ; if end-of-string, return 0
     leave
     ret
-null_end:
-    xor rax, rax ; return 0
+.not_eq:
+    movzx rax, byte[rdi - 1] ; prepare s1 for sub and put it in rax
+    movzx rdx, byte[rsi - 1] ; prepare s2 for sub
+    sub rax, rdx ; substract s1 from s2
     leave
     ret
-string_end:
-    mov r8b, byte[rdi]
-    mov r9b, byte[rsi]
-    sub r8b, r9b
-    movzx rax, r8b

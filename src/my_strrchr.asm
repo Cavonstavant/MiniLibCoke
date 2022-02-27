@@ -1,29 +1,30 @@
 [BITS 64]
-global strchr:function
+global strrchr:function
 global rindex:function
 extern strlen
 section .text
 
 rindex:
+
 strrchr:
     enter 0,0
     cmp rdi, 0 ; check if the string is NULL / empty
-    je not_found
-    push rdi
-    jmp strlen wrt ..plt
-    pop rdi
-    add rcx, rax
+    jz not_found
+    call strlen wrt ..plt
+    mov r8, rax
+    sub r8, 1
 
 loop:
-    cmp byte[rdi], sil; compare str[0 + rcx] with the c
-    je found ; if yes jump
-    cmp byte[rdi], 0; check if we reached the end of the string
+    cmp byte[rdi + r8], 0; check if we reached the end of the string
     je not_found ; if yes jump
-    dec rdi; decrease the counter
+    cmp byte[rdi + r8], sil; compare str[0 + rcx] with the c
+    je found ; if yes jump
+    dec r8; decrease the counter
     jmp loop
 
 found:
-    mov rax, rdi ; return the pointer to the found character
+    lea rax, [rdi + r8] ; return the pointer to the found character
+    ; mov rax, rdi
     leave
     ret
 

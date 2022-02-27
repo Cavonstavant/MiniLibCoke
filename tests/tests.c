@@ -74,7 +74,6 @@ Test(test_strcmp, tests)
     char *str2 = "";
 
     _strcmp = dlsym(handle, "strcmp");
-    printf("%d %d", _strcmp(str1, str2), strcmp(str1, str2));
     cr_assert_eq(_strcmp(str, str1), strcmp(str, str1), "excpected: %d, got: %d", strcmp(str, str1), _strcmp(str, str1));
     cr_assert_eq(_strcmp(str1, str2), strcmp(str1, str2), "excpected: %d, got: %d", strcmp(str, str1), _strcmp(str, str1));
 }

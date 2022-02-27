@@ -4,14 +4,12 @@ section .text
 
 memset:
     enter 0, 0
+    xor rcx, rcx
 loop:
-    cmp rdi, 0
-    je end
-    mov [rdi + rdx], sil ; else write to memory
-    cmp rdx, 0 ; check if we are done
+    cmp rcx, rdx ; check if we are done
+    mov [rdi + rcx], sil ; else write to memory
     je end ; if yes jump
-    ; inc rdi ; in crement offset
-    dec rdx ; increment temp count
+    inc rcx ; increment temp count
     jmp loop ; loop
 
 end:

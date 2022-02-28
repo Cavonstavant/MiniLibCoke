@@ -20,8 +20,8 @@ OBJ_ASM := 	$(SRC_ASM:.asm=.o)
 
 ASM := nasm
 
-AFLAGS := -f elf64
-CFLAGS := -shared -fpic -g
+AFLAGS := -f elf64 -g
+CFLAGS := -shared -fpic -g -fno-builtin
 
 LD := ld
 GCC := gcc

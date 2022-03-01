@@ -7,8 +7,8 @@ memset:
     xor rcx, rcx
 loop:
     cmp rcx, rdx ; check if we are done
-    mov [rdi + rcx], sil ; else write to memory
     je end ; if yes jump
+    mov [rdi + rcx], sil ; else write to memory
     inc rcx ; increment temp count
     jmp loop ; loop
 

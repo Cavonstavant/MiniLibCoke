@@ -32,6 +32,7 @@ all: $(SRC_ASM) $(NAME)
 
 $(NAME): $(OBJ_ASM)
 	$(LD) $(CFLAGS) $(OBJ_ASM) -o $@
+	cp $@ tests/
 
 %.o: %.asm
 	$(ASM) $(AFLAGS) $< -o $@
@@ -41,12 +42,11 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) tests/$(NAME)
 
 re: fclean all
 
 tests_run: re
-	chmod +r libasm.so
-	cp libasm.so tests/
 	$(GCC) -g $(T_STRC) -ldl -lcriterion -o tests/main
 	./tests/main
 

@@ -14,6 +14,7 @@ strncmp:
     cmp byte[rdi - 1], 0 ; check if end-of-string
     jne .loop ; loop if not
 .eq:
+
     xor rax, rax ; if end-of-string, return 0
     leave
     ret

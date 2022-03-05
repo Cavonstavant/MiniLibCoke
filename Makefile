@@ -12,7 +12,8 @@ SRC_ASM := 	src/my_strlen.asm \
 			src/my_memcpy.asm \
 			src/my_strcmp.asm \
 			src/my_strncmp.asm \
-			src/my_strcasecmp.asm
+			src/my_strcasecmp.asm \
+			src/my_strpbrk.asm
 
 T_STRC := tests/tests.c
 

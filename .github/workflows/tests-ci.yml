@@ -12,6 +12,13 @@ jobs:
     container:
       image: epitechcontent/epitest-docker
     steps:
+      - name: Cache image
+        uses: actions/cache@v2
+        with:
+          path: /var/lib/docker/images/
+          key: ${{ runner.os }}-tests-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-tests-
       - uses: actions/checkout@v2
       - name: run_tests
         run: make tests_run

@@ -16,7 +16,7 @@ strcasecmp:
     cmp r8b, 90 ; str1[rcx] is lowercase
     jl .check_str2_case ; check str2[rcx]
 .check_str2_case:
-    mov r9b, [rdi + rcx] ; get char
+    mov r9b, [rsi + rcx] ; get char
     cmp r9b, 65 ; str2[rcx] is uppercase
     jl .cmp
     cmp r9b, 90 ; str2[rcx] is lowercase
@@ -37,6 +37,7 @@ strcasecmp:
     add r9b, 32 ; convert to lowercase
     jmp .cmp ; check str1[rcx] and str2[rcx]
 .end:
-    sub r9b, r8b ; return difference
-    movzx rax, r9b ; return difference
+    movzx rax, r8b
+    movzx r9, r9b  ; return difference
+    sub rax, r9
     ret

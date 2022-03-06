@@ -23,7 +23,6 @@ loop:
 
 found:
     lea rax, [rdi + r8] ; return the pointer to the found character
-    ; mov rax, rdi
     leave
     ret
 

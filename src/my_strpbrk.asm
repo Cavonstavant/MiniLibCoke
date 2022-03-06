@@ -15,6 +15,7 @@ strpbrk:
     je .not_found
     push rdi
     push rsi
+    push rcx
     xchg rdi, rsi ; swap rdi and rsi
     mov r8b, byte[rsi + rcx]
     movzx rsi, r8b
@@ -23,13 +24,15 @@ strpbrk:
     jne .found
     pop rdi
     pop rsi
+    pop rcx
     inc rcx
     xchg rdi, rsi
     jmp .loop
 .found:
-    xchg rsi, rdi
-    pop rdi
+    pop rcx
     pop rsi
+    pop rdi
+    xchg rsi, rdi
     mov rax, rsi
     add rax, rcx
     leave
